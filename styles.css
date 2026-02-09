@@ -1283,21 +1283,21 @@ body {
 .event-list {
   list-style: none;
   padding: 1.5rem;
-  background: var(--bg-alt);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95));
   border-radius: 15px;
-  border: 1px solid var(--border-soft);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(99, 102, 241, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .event-list li {
   padding: 1rem;
   margin-bottom: 0.8rem;
-  background: #ffffff;
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.15), transparent);
   border-radius: 10px;
-  border-left: 4px solid var(--accent);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #06b6d4;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
-  color: var(--text-main);
+  color: #e5e7eb;
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -1307,14 +1307,38 @@ body {
 }
 
 .event-list li:hover {
-  transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-left-color: var(--primary);
+  transform: translateX(10px);
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+  border-left-color: #ec4899;
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.2), transparent);
 }
 
 .event-list li strong {
-  color: var(--primary);
+  color: #38bdf8;
   font-weight: 700;
+}
+
+.event-list li span {
+  color: #e5e7eb;
+}
+
+/* Dark Mode para event-list */
+body.dark-mode .event-list {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .event-list li {
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.2), transparent);
+  color: #e5e7eb;
+}
+
+body.dark-mode .event-list li strong {
+  color: #38bdf8;
+}
+
+body.dark-mode .event-list li span {
+  color: #e5e7eb;
 }
 
 /* ===== Programas CTA ===== */
@@ -1584,10 +1608,15 @@ body {
   font-size: 1.5rem;
   color: var(--text-soft);
   transition: transform 0.3s ease;
+  display: inline-block;
 }
 
 .sidebar-item:hover .sidebar-arrow {
   transform: translateX(5px);
+}
+
+.sidebar-item.active .sidebar-arrow {
+  transform: rotate(90deg);
 }
 
 /* Sidebar Link (para enlaces como Dashboard Admin) */
@@ -1618,9 +1647,18 @@ body {
 
 /* Theme Options */
 .theme-options {
-  padding-left: 3rem;
+  padding-left: 2rem;
   margin-top: 0.5rem;
   animation: slideDown 0.3s ease;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.theme-options[style*="display: block"] {
+  max-height: 1000px;
+  opacity: 1;
 }
 
 @keyframes slideDown {
@@ -1649,6 +1687,7 @@ body {
   font-size: 0.95rem;
   color: var(--text-main);
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .theme-option:hover {
@@ -1656,6 +1695,27 @@ body {
   color: white;
   border-color: var(--primary);
   transform: translateX(5px);
+}
+
+/* Estilos específicos para enlaces de servicios */
+.theme-options a.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.theme-options a.theme-option:hover {
+  color: white;
+}
+
+body.dark-mode .theme-options a.theme-option {
+  color: #e5e7eb;
+}
+
+body.dark-mode .theme-options a.theme-option:hover {
+  color: white;
 }
 
 .theme-option span {
@@ -1679,6 +1739,37 @@ body {
 .sidebar-overlay.active {
   opacity: 1;
   visibility: visible;
+}
+
+/* Responsive para sidebar */
+@media (max-width: 768px) {
+  .sidebar-menu {
+    width: 85%;
+    max-width: 350px;
+  }
+
+  .theme-options {
+    padding-left: 1rem;
+  }
+
+  .theme-option {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .sidebar-item {
+    padding: 0.9rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-menu {
+    width: 90%;
+  }
+
+  .theme-options {
+    padding-left: 0.5rem;
+  }
 }
 
 /* Dark mode para sidebar */
@@ -2403,205 +2494,206 @@ body.dark-mode .dot {
   bottom: 30px;
   /* Mantener fijo, el popup está arriba */
 }
+
 /* =========================================
    Fase 13: Mejoras de Seguridad y Estilo Futurista
    ========================================= */
 
 /* Estilos Futuristas para Inputs */
 .futuristic-input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(52, 152, 219, 0.3);
-    color: #2c3e50;
-    padding: 12px 15px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    width: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  color: #2c3e50;
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body.dark-mode .futuristic-input {
-    background: rgba(0, 0, 0, 0.2);
-    border-color: rgba(52, 152, 219, 0.5);
-    color: #ecf0f1;
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(52, 152, 219, 0.5);
+  color: #ecf0f1;
 }
 
 .futuristic-input:focus {
-    outline: none;
-    border-color: #00d2ff;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  border-color: #00d2ff;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Estilos Futuristas para Botones */
 .futuristic-btn {
-    background: linear-gradient(45deg, #2980b9, #2c3e50);
-    border: none;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
+  background: linear-gradient(45deg, #2980b9, #2c3e50);
+  border: none;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
 .futuristic-btn::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: rotate(45deg);
-    transition: 0.5s;
-    opacity: 0;
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: 0.5s;
+  opacity: 0;
 }
 
 .futuristic-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
-    background: linear-gradient(45deg, #3498db, #34495e);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
+  background: linear-gradient(45deg, #3498db, #34495e);
 }
 
 .futuristic-btn:hover::after {
-    opacity: 1;
-    left: 100%;
+  opacity: 1;
+  left: 100%;
 }
 
 .futuristic-btn.danger {
-    background: linear-gradient(45deg, #c0392b, #8e44ad);
+  background: linear-gradient(45deg, #c0392b, #8e44ad);
 }
 
 .futuristic-btn.danger:hover {
-    box-shadow: 0 6px 20px rgba(192, 57, 43, 0.4);
+  box-shadow: 0 6px 20px rgba(192, 57, 43, 0.4);
 }
 
 /* Secci�n Reportalo al Director */
 .director-report-section {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    margin-top: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 
 body.dark-mode .director-report-section {
-    background: #1a252f;
-    border-color: #2c3e50;
+  background: #1a252f;
+  border-color: #2c3e50;
 }
 
 .director-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
 }
 
 .director-header i {
-    font-size: 2.5rem;
-    color: #c0392b;
+  font-size: 2.5rem;
+  color: #c0392b;
 }
 
 .director-header h2 {
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin: 0;
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 0;
 }
 
 body.dark-mode .director-header h2 {
-    color: #ecf0f1;
+  color: #ecf0f1;
 }
 
 /* Campa�a Anti-Bullying (Fuerza Encubierta) */
 .anti-bullying-section {
-    margin-top: 40px;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    border-radius: 15px;
-    padding: 40px;
-    color: white;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  margin-top: 40px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  border-radius: 15px;
+  padding: 40px;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .anti-bullying-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-    opacity: 0.1;
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+  opacity: 0.1;
+  pointer-events: none;
 }
 
 .agent-badge {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    margin: 0 auto 20px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
 }
 
 .mission-title {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    background: linear-gradient(to right, #00d2ff, #3a7bd5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #00d2ff, #3a7bd5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .mission-text {
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto 30px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .file-upload-wrapper {
-    position: relative;
-    margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 .file-upload-label {
-    display: block;
-    padding: 15px;
-    background: rgba(52, 152, 219, 0.1);
-    border: 2px dashed #3498db;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: #3498db;
-    font-weight: 600;
+  display: block;
+  padding: 15px;
+  background: rgba(52, 152, 219, 0.1);
+  border: 2px dashed #3498db;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #3498db;
+  font-weight: 600;
 }
 
 .file-upload-label:hover {
-    background: rgba(52, 152, 219, 0.2);
-    transform: translateY(-2px);
+  background: rgba(52, 152, 219, 0.2);
+  transform: translateY(-2px);
 }
 
 .file-upload-input {
-    display: none;
+  display: none;
 }

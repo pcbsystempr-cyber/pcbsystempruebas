@@ -71,6 +71,9 @@
       border-top: 1px solid #ddd;
       display: flex;
       gap: 10px;
+      position: sticky;
+      bottom: 0;
+      z-index: 100;
     }
 
     .chat-input {
@@ -80,10 +83,73 @@
       border-radius: 25px;
       outline: none;
       transition: border-color 0.3s;
+      font-size: 16px;
+      -webkit-appearance: none;
+      appearance: none;
     }
 
     .chat-input:focus {
       border-color: #667eea;
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+      .chat-input-area {
+        padding: 10px 15px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .chat-input {
+        font-size: 16px;
+        padding: 10px 15px;
+        min-height: 44px;
+      }
+
+      .send-btn {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+      }
+
+      .chat-messages {
+        padding-bottom: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .chat-input-area {
+        padding: 8px 10px;
+      }
+
+      .chat-input {
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+    }
+
+    /* Dark Mode para Chat Input */
+    body.dark-mode .chat-input-area {
+      background: #1e1e1e !important;
+      border-top-color: #404040 !important;
+    }
+
+    body.dark-mode .chat-input {
+      background: #2d2d2d !important;
+      color: #e5e7eb !important;
+      border-color: #404040 !important;
+    }
+
+    body.dark-mode .chat-input:focus {
+      border-color: #667eea !important;
+    }
+
+    body.dark-mode .chat-input::placeholder {
+      color: #9ca3af !important;
     }
 
     .send-btn {
