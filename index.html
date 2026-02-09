@@ -404,6 +404,56 @@
   <!-- Overlay para cerrar el menú -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+  <!-- Script para el toggle de servicios digitales -->
+  <script>
+    (function () {
+      // Esperar a que el DOM esté listo
+      function initServicesToggle() {
+        const servicesToggle = document.getElementById('servicesToggle');
+        const servicesOptions = document.getElementById('servicesOptions');
+
+        if (servicesToggle && servicesOptions) {
+          console.log('Servicios toggle encontrado');
+
+          servicesToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log('Click en servicios toggle');
+
+            const isHidden = servicesOptions.style.display === 'none' || servicesOptions.style.display === '';
+            const arrow = this.querySelector('.sidebar-arrow');
+
+            if (isHidden) {
+              console.log('Mostrando submenu');
+              servicesOptions.style.display = 'block';
+              if (arrow) {
+                arrow.style.transform = 'rotate(90deg)';
+              }
+              this.classList.add('active');
+            } else {
+              console.log('Ocultando submenu');
+              servicesOptions.style.display = 'none';
+              if (arrow) {
+                arrow.style.transform = 'rotate(0deg)';
+              }
+              this.classList.remove('active');
+            }
+          });
+        } else {
+          console.log('No se encontró servicesToggle o servicesOptions');
+        }
+      }
+
+      // Ejecutar cuando el DOM esté listo
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initServicesToggle);
+      } else {
+        initServicesToggle();
+      }
+    })();
+  </script>
+
   <!-- HERO / INICIO -->
   <section id="inicio" class="hero">
     <div class="container">
